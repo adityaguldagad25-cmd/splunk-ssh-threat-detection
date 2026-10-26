@@ -90,3 +90,6 @@ This project uses simulated training data for educational purposes. The IP addre
 Aditya Guldagad
 
 Cybersecurity Learner | Interested in SOC Analysis, SIEM, and Threat Detection
+## Dashboard Screenshot
+
+![SSH Threat Detection Dashboard](ssh-dashboard.png)
