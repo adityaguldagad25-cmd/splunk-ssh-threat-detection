@@ -1,5 +1,4 @@
 # Splunk SSH Threat Detection
-
 ## Project Overview
 
 This project demonstrates SSH authentication log analysis using Splunk Enterprise. It identifies failed login attempts, successful logins, usernames, and source IP addresses from sample logs.
@@ -62,3 +61,4 @@ The logs used in this project are simulated training data. The results do not re
 ## Author
 
 Aditya Guldagad
+<img width="931" height="591" alt="image" src="https://github.com/user-attachments/assets/9d513e0e-430e-464b-9d8a-bb2ab3b1ac80" />
