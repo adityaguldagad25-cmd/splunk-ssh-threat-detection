@@ -83,13 +83,12 @@ Security analysts should investigate the source, timing, frequency, and related 
 - Create alerts for repeated failed logins.
 - Include more authentication event types.
 - Investigate events using additional security logs.
-12. Dashboard Screenshot
+  12.## Dashboard Screenshot
+
+![SSH Threat Detection Dashboard](ssh-dashboard.png)
 13. Disclaimer
 This project uses simulated training data for educational purposes. The IP addresses and events are examples and do not establish malicious activity by any real system.
 14. Author
 Aditya Guldagad
 
 Cybersecurity Learner | Interested in SOC Analysis, SIEM, and Threat Detection
-## Dashboard Screenshot
-
-![SSH Threat Detection Dashboard](ssh-dashboard.png)
