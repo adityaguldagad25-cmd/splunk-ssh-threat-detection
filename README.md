@@ -1,64 +1,100 @@
-# Splunk SSH Threat Detection
-## Project Overview
+- Identify failed login attempts.
+- Find usernames targeted by login attempts.
+- Identify source IP addresses associated with failed logins.
+- Review successful authentication events.
+- Create a Splunk dashboard to display findings.
 
-This project demonstrates SSH authentication log analysis using Splunk Enterprise. It identifies failed login attempts, successful logins, usernames, and source IP addresses from sample logs.
-
-## Tools Used
+## 3. Tools and Technologies
 
 - Splunk Enterprise
-- SPL (Search Processing Language)
+- Search Processing Language (SPL)
 - SSH Authentication Logs
+- GitHub
+- Windows
 
-## Project Features
+## 4. Project Workflow
 
-- Failed login analysis
-- Successful login analysis
-- Source IP analysis
-- Username analysis
-- Splunk dashboard with three panels
+1. Create sample SSH authentication logs.
+2. Upload the log file to Splunk.
+3. Configure the source type.
+4. Search and filter authentication events.
+5. Extract usernames and source IP addresses.
+6. Analyze failed and successful logins.
+7. Create a dashboard.
+8. Document the results on GitHub.
 
-## Sample Findings
+## 5. Sample Log Data
 
-- Failed login attempts: 4
-- Source IP: `192.0.2.15`
-- Successful login: `aditya`
-- Failed usernames: `admin`, `root`, `test`, `guest`
+The sample dataset contains six simulated SSH authentication events.
 
-## Dashboard Screenshot
+| Event Type | Count |
+|---|---:|
+| Failed login attempts | 4 |
+| Successful logins | 1 |
+| Connection closed during authentication | 1 |
+| Total events | 6 |
 
-![Splunk SSH Threat Detection Dashboard](ssh-dashboard.png)
+## 6. SPL Queries and Analysis
 
-## SPL Queries
-
-### Failed Logins by IP
+### 6.1 Failed Login Attempts
 
 ```spl
 index=* sourcetype=linux_secure "Failed password"
-| rex "from (?<src>\d{1,3}(?:\.\d{1,3}){3})"
-| stats count by src
-```
 
-### Failed Logins by Username
 
-```spl
+Purpose: Searches for SSH authentication events containing failed password attempts.
+6.2 Failed Logins by Username
 index=* sourcetype=linux_secure "Failed password"
 | rex "Failed password for (?:invalid user )?(?<username>\S+)"
 | stats count by username
-```
 
-### Successful Logins
 
-```spl
+Purpose: Extracts usernames from failed login events and counts the attempts for each username.
+6.3 Successful Logins
 index=* sourcetype=linux_secure "Accepted password"
 | rex "Accepted password for (?<username>\S+)"
 | stats count by username
-```
 
-## Disclaimer
 
-The logs used in this project are simulated training data. The results do not represent a real cyberattack.
+Purpose: Identifies usernames associated with successful password authentication.
+6.4 Failed Login Attempts by Source IP
+index=* sourcetype=linux_secure "Failed password"
+| rex "from (?<src>\d{1,3}(?:\.\d{1,3}){3})"
+| stats count by src
 
-## Author
 
+Purpose: Extracts source IP addresses and counts failed login events associated with each address.
+7. Dashboard
+The Splunk dashboard contains three panels:
+- Failed Login Attempts by IP
+- Successful Logins by Username
+- Failed Logins by Username
+These panels help summarize authentication activity and make the results easier to review.
+8. Sample Findings
+- Four failed login attempts were recorded.
+- The source IP 192.0.2.15 was associated with all four failed attempts.
+- The usernames admin, root, test, and guest each had one failed attempt.
+- One successful login was recorded for the username aditya.
+- One additional event recorded a connection closed during authentication.
+9. Security Observations
+Repeated failed login attempts can indicate password guessing or an attempted brute-force attack. However, these sample events alone do not prove that an actual attack occurred.
+
+Security analysts should investigate the source, timing, frequency, and related events before drawing conclusions.
+10. Limitations
+- The dataset contains only six simulated events.
+- The results do not represent real production traffic.
+- The sample is too small to establish a real attack pattern.
+- The project demonstrates basic log analysis rather than a complete production SIEM deployment.
+11. Future Improvements
+- Analyze a larger SSH log dataset.
+- Add time-based visualizations.
+- Create alerts for repeated failed logins.
+- Add more authentication event types.
+- Investigate events using a larger set of security logs.
+12. Dashboard Screenshot
+13. Disclaimer
+This project uses simulated training data for educational purposes. The IP addresses and events are examples and do not establish malicious activity by any real system.
+14. Author
 Aditya Guldagad
-<img width="931" height="591" alt="image" src="https://github.com/user-attachments/assets/9d513e0e-430e-464b-9d8a-bb2ab3b1ac80" />
+
+Cybersecurity Learner | Interested in SOC Analysis, SIEM, and Threat Detection
